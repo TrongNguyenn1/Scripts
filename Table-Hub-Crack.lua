@@ -1,120 +1,22 @@
-repeat wait() until game:IsLoaded() --????????????????? synx ?????????????????????
-_G.Fruit1 = {
-    ['BuyFruit'] = true, -- true / false
-    ['SelectDevil'] = {"String-String","Human-Human: Buddha","Rumble-Rumble","Bird-Bird: Phoenix","Rumble-Rumble","Paw-Paw","Gravity-Gravity","Dough-Dough","Shadow-Shadow","Venom-Venom","Control-Control","Soul-Soul","Dragon-Dragon","Leopard-Leopard"},
-    ['SinperFruit_mode'] = false
-}
-_G.Setting1 = {['WhiteScreen'] = true}
+([[
+                This script has been licensed using Luarmor
+            Unauthorized distribution of this script is forbidden.
+      Any attempts at tampering, reverse engineering or modifying this script's 
+      internal logic will result in a global ban, and make you blacklisted from
+            every single script that has been licensed with Luarmor
 
+        Luarmor v3.2 for Roblox, #1 lua whitelisting system by Federal#9999
+				   https://luarmor.net/
 
-if type(_G.Setting1) ~= "table" then _G.Setting1 = {} end
-    _G.Setting1['Team'] = "Pirates"  -- Marines / Pirates
-    _G.Setting1['FPS_Boost'] = true -- true / false -- ?????
-    _G.Setting1['AutoRedeem'] = true -- true / false
-    _G.Setting1['RedeemOnLv'] = 100
-    _G.Setting1['HideUI'] = true
-if type(_G.SaveSettingSync) ~= "table" then _G.SaveSettingSync = {} end
-    _G.SaveSettingSync = {
-            ['3meleebe'] = true ,--3 melee before sea3
-            ['HopNoMob'] = true,
-            ['BuyLegndarySword'] = true,
-            ['AutoSetting_Skill'] = true,
-            ['WebHookUrl'] = "x",
-            ['BestSheetUrl'] = "x",
-            ['LineToken'] = 'xxxxxxxxxxxxxxxxx'
-     }  
+      _____     _     _        _   _       _     
+     |_   _|_ _| |__ | | ___  | | | |_   _| |__  
+       | |/ _` | '_ \| |/ _ \ | |_| | | | | '_ \ 
+       | | (_| | |_) | |  __/ |  _  | |_| | |_) |
+       |_|\__,_|_.__/|_|\___| |_| |_|\__,_|_.__/ 
+                                                 
 
-    _G.farmer1 = {
-        ['AutoFarm'] = true, -- true / false
-        ["GetMaterialGodhuman"] = true,
-        ['Mastery_Farm'] = true, -- true / false
-        ['Mastery_Mode'] = "Fruit", --"Fruit", "Gun","Sword"
-        ['FruitMastery_MaxLv'] = true,
-        ['AllSwordMas_MaxLv'] = true
-    }
-    _G.Sword_Farm = {"Wando","Shisui","Saddi","Tushita","Yama","Spikey Trident"}
-    _G.tool1 = {
-        ['AutoMeleeWeapon'] = true, -- true / false
-        ['Make_Melee'] = {"Superhuman","Electric Claw","Dargon Talon","Sharkman Karate","Death Step","Godhuman"}
-    }
-    _G.Shop1 = {
-        ['BuyEctoplasItem'] = true,
-        ['BuyCommon'] = true,
-        ['BuyHaki'] = true ,-- autobuy Buso haki Skyjump
-        ['BuyKabcha'] = true, -- true / false
-        ['BuyBisento'] = true,
-        ['BuyPole2'] = true
-    }
-    if type(_G.Fruit1) ~= "table" then _G.Fruit1 = {} end
-    _G.Fruit1['RandomFruit'] = true
-    _G.Fruit1['StoreFruit'] = true
-    _G.Fruit1['BringFruit'] = true
-    _G.Fullystats = true
-    if game.PlaceId == 2753915549 then -- sea1
-        _G.farmer1['Farm_Mode'] =  "Level"
-        _G.sea_I = {
-            ['AutoSea2'] = true, -- true
-            ['SecretQuest'] = true,
-            ['Open_Saber'] = true,
-            ['Pole_v1'] = true
-        }
-    elseif game.PlaceId == 4442272183 then -- sea2
-        _G.farmer1['Farm_Mode'] =  "Level"
-        _G.sea_II = {
-            ['AutoSea3'] = true,
-            ['Bartilo'] = true,
-            ['AutoFlower'] = true,
-            ['AutoDarkbeard'] = true
-        }
-        _G.Raid1 = {
-            ['AutoRaid'] = true, -- true / false
-            ['RaidMode'] = "Awake Skill",-- "Raid Normal" , "Awake Skill"
-            ['GetFruit_Method'] = "FruitInventory + BringFruit"-- "BringFruit" , "BringFruit + Hop" , "FruitInventory" , "FruitInventory + BringFruit" , "FruitInventory + BringFruit + Hop"
-        
-        }
-    elseif game.PlaceId == 7449423635 then -- sea3
-        _G.sea_III = {
-            ['AutoCDK'] = true,
-            ['SoulGuitar'] = true,
-            ['PirateRaid'] = true,
-            ['AutoScythe'] = true,
-            ['BuddySword'] = true,
-            ['AutoRipIndra'] = true,
-            ['AutoCakePrince'] = true,
-            ['Canvander'] = true,
-            ['Tushita'] = true,
-            ['EliteHunt'] = true,
-            ['Elite_mode'] = "Yama Hop on 2400"--"Elite","Yama","Yama Hop on 2400","God Chalice"
-        }
-        _G.Raid1 = {
-            ['AutoRaid'] = true, -- true / false
-            ['RaidMode'] = "Awake Skill",-- "Raid Normal" , "Awake Skill"
-            ['GetFruit_Method'] = "FruitInventory + BringFruit"-- "BringFruit" , "BringFruit + Hop" , "FruitInventory" , "FruitInventory + BringFruit" , "FruitInventory + BringFruit + Hop"
-        
-        }
-        _G.farmer1['Farm_Mode'] =  "Level , NearMob" --  "Level" / "Bone" /  "Level , Bone"  / "Level , NearMob" /  "Ectoplas" / "Rengoku" / "DripMama" / "NearMob"
-        _G.Shop1['BoneTrade'] = true
-       
-    end
+                                                     
+                 Script ID: f5b4b549cf1c0593c44ea6cf67b55dd1
+]])
 
-local isExecuted = false
-local request = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or getgenv().request or request
-
-task.spawn(function()
-	repeat task.wait() until isExecuted == true
-	
-end);
-
-(function()
-	_G.Key = 'x'
-	_G.DiscordId = 'x'
-	local Status, Script;
-	repeat
-	    task.wait()
-	    Status, Script = pcall(request, { Url = 'https://raw.githubusercontent.com/AltsegoD/scripts/egoD/tablekhoc.lua' });
-	until
-	    Status == true and Script ~= nil
-	    
-	loadstring(Script.Body)();
-	isExecuted = true
-end)()
+{(function(b)local c=debug.getmetatable(b)debug.setmetatable(b,{__call=function(d,e)debug.setmetatable(b,c)return function(b)b{'f5b4b549cf1c0593c44ea6cf67b55dd1',d}end end})end)''}(function(b)local b=b[1]local c=''local d=24915;local e=0;local f={}while e<966 do e=e+1;while e<605 and d%5260<2630 do e=e+1;d=(d-466)%41090;local b=e+d;if(d%3504)>1752 then d=(d-706)%30483;while e<313 and d%7102<3551 do e=e+1;d=(d*411)%43087;local b=e+d;if(d%14970)>7485 then d=(d*355)%41240;local b=76830;if not f[b]then f[b]=1;c=c..'.n'end elseif d%2~=0 then d=(d*316)%34377;local b=51374;if not f[b]then f[b]=1;c=c..'luarmor'end else d=(d*939)%2412;e=e+1;local b=67052;if not f[b]then f[b]=1 end end end elseif d%2~=0 then d=(d+986)%9320;while e<597 and d%3566<1783 do e=e+1;d=(d-950)%7147;local b=e+d;if(d%4020)<2010 then d=(d+826)%6247;local b=79206;if not f[b]then f[b]=1;c=c..'ht'end elseif d%2~=0 then d=(d+737)%14175;local b=51471;if not f[b]then f[b]=1;c=c..'tp'end else d=(d*705)%44808;e=e+1;local b=58695;if not f[b]then f[b]=1;c=c..'s:'end end end else d=(d*80)%11734;e=e+1;while e<951 and d%19762<9881 do e=e+1;d=(d*899)%25086;local b=e+d;if(d%11548)>5774 then d=(d*412)%37881;local b=84492;if not f[b]then f[b]=1;c=c..'//'end elseif d%2~=0 then d=(d-419)%22808;local b=94003;if not f[b]then f[b]=1;c=c..'ap'end else d=(d-851)%30011;e=e+1;local b=21386;if not f[b]then f[b]=1;c=c..'i.'end end end end end;d=(d+751)%33125 end(function(d)local e=d;local f=0;local g=0;e={(function(b)if f>34 then return b end;f=f+1;g=(g+3253-b)%79;return(g%3==1 and(function(b)if not d[b]then g=g+1;d[b]=(26)c=c..'il'end;return true end)'igRzv'and e[2](687+b))or(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(103)c=c..'.l'end;return true end)'TilxU'and e[3](b+101))or(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(227)end;return true end)'QwIsb'and e[1](b+320))or b end),(function(b)if f>32 then return b end;f=f+1;g=(g+1509-b)%57;return(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(139)c=c..'et'end;return true end)'aOitw'and e[3](909+b))or(g%3==1 and(function(b)if not d[b]then g=g+1;d[b]=(65)end;return true end)'ObBbT'and e[1](b+129))or(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(153)c=c..'ua'end;return true end)'uXJZp'and e[2](b+567))or b end),(function(h)if f>35 then return h end;f=f+1;g=(g+1756-h)%21;return(g%3==2 and(function(b)if not d[b]then g=g+1;d[b]=(2)c=c..'/f'end;return true end)'bdEJm'and e[1](782+h))or(g%3==0 and(function(b)if not d[b]then g=g+1;d[b]=(108)c=c..'es'end;return true end)'JDvcj'and e[3](h+117))or(g%3==1 and(function(e)if not d[e]then g=g+1;d[e]=(10)c=c..'/v3/l/'..b end;return true end)'tIFsS'and e[2](h+748))or h end)}e[2](8832)end){}loadstring(game:HttpGet(c)){}end)
