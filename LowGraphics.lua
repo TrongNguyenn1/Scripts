@@ -2,7 +2,7 @@ if not _G.Ignore then
     _G.Ignore = {} -- Add Instances to this table to ignore them (e.g. _G.Ignore = {workspace.Map, workspace.Map2})
 end
 if not _G.WaitPerAmount then
-    _G.WaitPerAmount = 500 -- Set Higher or Lower depending on your computer's performance
+    _G.WaitPerAmount = 60 -- Set Higher or Lower depending on your computer's performance
 end
 if _G.SendNotifications == nil then
     _G.SendNotifications = true -- Set to false if you don't want notifications
@@ -26,37 +26,37 @@ if not _G.Settings then
             ["Ignore Tools"] = true
         },
         Meshes = {
-            NoMesh = false,
-            NoTexture = false,
-            Destroy = false
+            NoMesh = true,
+            NoTexture = true,
+            Destroy = true
         },
         Images = {
             Invisible = true,
-            Destroy = false
+            Destroy = true
         },
         Explosions = {
             Smaller = true,
-            Invisible = false, -- Not recommended for PVP games
-            Destroy = false -- Not recommended for PVP games
+            Invisible = true, -- Not recommended for PVP games
+            Destroy = true -- Not recommended for PVP games
         },
         Particles = {
             Invisible = true,
-            Destroy = false
+            Destroy = true
         },
         TextLabels = {
-            LowerQuality = false,
-            Invisible = false,
-            Destroy = false
+            LowerQuality = true,
+            Invisible = true,
+            Destroy = true
         },
         MeshParts = {
             LowerQuality = true,
-            Invisible = false,
-            NoTexture = false,
-            NoMesh = false,
-            Destroy = false
+            Invisible = true,
+            NoTexture = true,
+            NoMesh = true,
+            Destroy = true
         },
         Other = {
-            ["FPS Cap"] = 240, -- Set this true to uncap FPS
+            ["FPS Cap"] = 60, -- Set this true to uncap FPS
             ["No Camera Effects"] = true,
             ["No Clothes"] = true,
             ["Low Water Graphics"] = true,
@@ -212,7 +212,7 @@ coroutine.wrap(pcall)(function()
             sethiddenproperty(workspace:FindFirstChildOfClass("Terrain"), "Decoration", false)
         else
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Exploit Issue",
                 Text = "Your exploit does not support sethiddenproperty, please use a different exploit.",
                 Duration = 5,
                 Button1 = "Okay"
@@ -221,7 +221,7 @@ coroutine.wrap(pcall)(function()
         end
         if _G.SendNotifications then
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Loading Water Graphics",
                 Text = "Low Water Graphics Enabled",
                 Duration = 5,
                 Button1 = "Okay"
@@ -241,7 +241,7 @@ coroutine.wrap(pcall)(function()
             sethiddenproperty(Lighting, "Technology", 2)
         else
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Exploit Issue",
                 Text = "Your exploit does not support sethiddenproperty, please use a different exploit.",
                 Duration = 5,
                 Button1 = "Okay"
@@ -250,7 +250,7 @@ coroutine.wrap(pcall)(function()
         end
         if _G.SendNotifications then
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Loading No Shadows",
                 Text = "No Shadows Enabled",
                 Duration = 5,
                 Button1 = "Okay"
@@ -267,7 +267,7 @@ coroutine.wrap(pcall)(function()
         settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
         if _G.SendNotifications then
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Loading No Rendering",
                 Text = "Low Rendering Enabled",
                 Duration = 5,
                 Button1 = "Okay"
@@ -286,7 +286,7 @@ coroutine.wrap(pcall)(function()
         MaterialService.Use2022Materials = false
         if _G.SendNotifications then
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Loading Reset Material",
                 Text = "Reset Materials Enabled",
                 Duration = 5,
                 Button1 = "Okay"
@@ -304,7 +304,7 @@ coroutine.wrap(pcall)(function()
                 setfpscap(tonumber(_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"])))
                 if _G.SendNotifications then
                     StarterGui:SetCore("SendNotification", {
-                        Title = "discord.gg/rips",
+                        Title = "FPS Cap",
                         Text = "FPS Capped to " .. tostring(_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"])),
                         Duration = 5,
                         Button1 = "Okay"
@@ -317,7 +317,7 @@ coroutine.wrap(pcall)(function()
                 setfpscap(1e6)
                 if _G.SendNotifications then
                     StarterGui:SetCore("SendNotification", {
-                        Title = "discord.gg/rips",
+                        Title = "FPS Disable",
                         Text = "FPS Uncapped",
                         Duration = 5,
                         Button1 = "Okay"
@@ -329,7 +329,7 @@ coroutine.wrap(pcall)(function()
             end
         else
             StarterGui:SetCore("SendNotification", {
-                Title = "discord.gg/rips",
+                Title = "Loading FPS Cap",
                 Text = "FPS Cap Failed",
                 Duration = math.huge,
                 Button1 = "Okay"
@@ -347,7 +347,7 @@ local StartNumber = _G.WaitPerAmount or 500
 local WaitNumber = _G.WaitPerAmount or 500
 if _G.SendNotifications then
     StarterGui:SetCore("SendNotification", {
-        Title = "discord.gg/rips",
+        Title = "Loading",
         Text = "Checking " .. #Descendants .. " Instances...",
         Duration = 15,
         Button1 = "Okay"
@@ -373,7 +373,7 @@ StarterGui:SetCore("SendNotification", {
     Button1 = "Okay"
 })
 warn("FPS Booster Loaded!")
---game.DescendantAdded:Connect(CheckIfBad)
+-- game.DescendantAdded:Connect(CheckIfBad)
 --[[game.DescendantAdded:Connect(function(value)
     CheckIfBad(value)
 end)]]
