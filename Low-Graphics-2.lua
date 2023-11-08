@@ -1,130 +1,17 @@
-local screenSaver = Instance.new("ScreenGui")
-local savingFrame = Instance.new("Frame")
-local dvd_logo = Instance.new("ImageLabel")
-local TextLabel = Instance.new("TextLabel")
-
-screenSaver.Name = "screenSaver"
-screenSaver.Enabled = false
-screenSaver.Parent = game:GetService("CoreGui")
-screenSaver.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-savingFrame.Name = "savingFrame"
-savingFrame.Parent = screenSaver
-savingFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
-savingFrame.BorderSizePixel = 0
-if _G.ShowUp == true then
-savingFrame.Position = UDim2.new(0, 0, 0, 0)
-savingFrame.Size = UDim2.new(1, 0,1, 0)
-else
-    savingFrame.Position = UDim2.new(0, 0, -0.0984251946, 0)
-savingFrame.Size = UDim2.new(1, 0, 1.09842515, 0)
-end
-
-dvd_logo.Name = "dvd_logo"
-dvd_logo.Parent = savingFrame
-dvd_logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-dvd_logo.BackgroundTransparency = 1.000
-dvd_logo.Position = UDim2.new(0.5, -50, 0.5, -50)
-dvd_logo.Size = UDim2.new(0, 100, 0, 100)
-dvd_logo.Image = "http://www.roblox.com/asset/?id=7371850353"
-
-TextLabel.Parent = dvd_logo
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.Position = UDim2.new(0.049999997, 0, 1, 0)
-TextLabel.Size = UDim2.new(0, 89, 0, 30)
-TextLabel.Font = Enum.Font.Michroma
-TextLabel.Text = "Currently Saving GPU"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 20.000
-TextLabel.TextWrapped = true
-
--- Scripts:
-
-local function SOVAXG_fake_script() -- savingFrame.LocalScript 
-	local script = Instance.new('LocalScript', savingFrame)
-
-	local rs = game:GetService("RunService")
-	
-	local x
-	local y
-	
-	local xspeed = 10
-	local yspeed = 10
-	
-	local dvd = script.Parent.dvd_logo
-	local cam = workspace.CurrentCamera
-	
-	local r, g, b
-	
-	local width = cam.ViewportSize.X
-	local height = cam.ViewportSize.Y
-	
-	function pickColor()
-		r = math.random(100, 256)
-		g = math.random(100, 256)
-		b = math.random(100, 256)
-	end
-	
-	x = math.random(0, width)
-	y = math.random(0, height)
-	
-	pickColor()
-	
-	rs.RenderStepped:Connect(function()
-		x = x + xspeed
-		y = y + yspeed
-		
-		dvd.Position = UDim2.fromOffset(x, y)
-		dvd.ImageColor3 = Color3.fromRGB(r, g, b)
-		
-		if x + dvd.AbsoluteSize.X >= width then
-			xspeed = -xspeed
-			x = width - dvd.AbsoluteSize.X
-			pickColor()
-		elseif x <= 0 then
-			xspeed = -xspeed
-			x = 0
-			pickColor()
-		end
-		
-		if y + dvd.AbsoluteSize.Y >= height then
-			yspeed = -yspeed
-			y = height - dvd.AbsoluteSize.Y
-			pickColor()
-		elseif y <= 0 then
-			yspeed = -yspeed
-			y = 0
-			pickColor()
-		end
-	end)
-end
-coroutine.wrap(SOVAXG_fake_script)()
-
-local RunService = game:GetService("RunService")
+repeat task.wait() until game:IsLoaded()
+if not game:IsLoaded() then game:IsLoaded():Wait(5) end
 local UserInputService = game:GetService("UserInputService")
-
-function savegpu()
-setfpscap(10)
-screenSaver.Enabled = true
-RunService:Set3dRenderingEnabled(false)
-end
-
-function unsavegpu()
-    setfpscap(360)
-screenSaver.Enabled = false
-RunService:Set3dRenderingEnabled(true)
-end
-
+local RunService = game:GetService("RunService")
 
 local WindowFocusReleasedFunction = function()
-	savegpu()
+	RunService:Set3dRenderingEnabled(false)
+	setfpscap(10)
 	return
 end
 
 local WindowFocusedFunction = function()
-	unsavegpu()
+	RunService:Set3dRenderingEnabled(true)
+	setfpscap(10)
 	return
 end
 
@@ -133,5 +20,76 @@ local Initialize = function()
 	UserInputService.WindowFocused:Connect(WindowFocusedFunction)
 	return
 end
-
 Initialize()
+UserSettings():GetService("UserGameSettings").MasterVolume = 0
+local decalsyeeted = true
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+sethiddenproperty(l,"Technology",2)
+sethiddenproperty(t,"Decoration",false)
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = 0
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i, v in pairs(w:GetDescendants()) do
+    if v:IsA("BasePart") and not v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") and decalsyeeted then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    elseif v:IsA("SpecialMesh") and decalsyeeted  then
+        v.TextureId=0
+    elseif v:IsA("ShirtGraphic") and decalsyeeted then
+        v.Graphic=1
+    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
+        v[v.ClassName.."Template"]=1
+    end
+end
+for i = 1,#l:GetChildren() do
+    e=l:GetChildren()[i]
+    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+        e.Enabled = false
+    end
+end
+w.DescendantAdded:Connect(function(v)
+   if v:IsA("BasePart") and not v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") and decalsyeeted then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    elseif v:IsA("SpecialMesh") and decalsyeeted then
+        v.TextureId=0
+    elseif v:IsA("ShirtGraphic") and decalsyeeted then
+        v.ShirtGraphic=1
+    elseif (v:IsA("Shirt") or v:IsA("Pants")) and decalsyeeted then
+        v[v.ClassName.."Template"]=1
+            end
+        end)
