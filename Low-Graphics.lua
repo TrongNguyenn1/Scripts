@@ -26,4 +26,20 @@ settings():GetService("RenderSettings").EagerBulkExecution = false
 workspace.LevelOfDetail = Enum.ModelLevelOfDetail.Disabled
 game:GetService("Lighting").GlobalShadows = false
 
-settings().Rendering.QualityLevel = "Level01"
+settings().Rendering.QualityLevel = 1
+settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+UserSettings():GetService('UserGameSettings').MasterVolume = 0
+game.StarterGui:SetCore("TopbarEnabled", false)
+game.StarterGui:SetCore("DevConsoleVisible", false)
+game.StarterGui:SetCoreGuiEnabled("Enum.CoreGuiType.PlayerList",false)
+game.StarterGui:SetCoreGuiEnabled("Enum.CoreGuiType.All",false)
+local lighting = game:GetService("Lighting")
+lighting.GlobalShadows = false
+lighting.Outlines = false
+lighting.Brightness = 1
+lighting.FogEnd = 1000
+lighting.FogStart = 100
+lighting.BaseAtmosphere:Destroy()
+lighting.Sky:Destroy()
+lighting.LightingLayers:Destroy()
