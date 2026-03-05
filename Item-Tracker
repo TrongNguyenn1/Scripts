@@ -64,7 +64,7 @@ local function Send()
     local data = {
         ["embeds"] = {{
             ["title"] = "Blox Fruits Status",
-            ["description"] = "**Người chơi:** `" .. player.Name .. "`\n**ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━",
+            ["description"] = "**Player:** `" .. player.Name .. "`\n**ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━",
             ["color"] = 0x2b2d31,
             ["fields"] = {
                 {
