@@ -69,7 +69,7 @@ local function Send()
             ["fields"] = {
                 {
                     ["name"] = "🖥️ System",
-                    ["value"] = "> **FPS:** `" .. fps .. "`\n> **Ping:** `" .. ping .. "ms`\n> **Uptime:** `" .. os.date("!%H:%M:%S", os.time() - startTime) .. "`",
+                    ["value"] = "> **FPS:** `" .. fps .. "`\n> **Ping:** `" .. ping .. " ms`\n> **Uptime:** `" .. os.date("!%H:%M:%S", os.time() - startTime) .. "`",
                     ["inline"] = true
                 },
                 {
