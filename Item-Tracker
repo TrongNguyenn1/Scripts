@@ -63,25 +63,25 @@ local function Send()
     
     local data = {
         ["embeds"] = {{
-            ["title"] = "Blox Fruits Status",
+            ["title"] = "Blox Fruits Player Overview",
             ["description"] = "**Player:** `" .. player.Name .. "`\n**ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━",
             ["color"] = 0x2b2d31,
             ["fields"] = {
                 {
-                    ["name"] = "🖥️ HỆ THỐNG",
-                    ["value"] = "> 🎮 **FPS:** `" .. fps .. "`\n> 📊 **Ping:** `" .. ping .. "ms`\n> ⏳ **Treo:** `" .. os.date("!%H:%M:%S", os.time() - startTime) .. "`",
+                    ["name"] = "🖥️ System",
+                    ["value"] = "> **FPS:** `" .. fps .. "`\n> **Ping:** `" .. ping .. "ms`\n> **Uptime:** `" .. os.date("!%H:%M:%S", os.time() - startTime) .. "`",
                     ["inline"] = true
                 },
                 {
-                    ["name"] = "👤 NHÂN VẬT",
-                    ["value"] = "> ⭐ **Level:** `" .. Format(level) .. "`\n> 💵 **Beli:** `" .. Format(beli) .. "`\n> 🟣 **Frag:** `" .. Format(frag) .. "`",
+                    ["name"] = "👤 Character",
+                    ["value"] = "> **Level:** `" .. Format(level) .. "`\n> **Beli:** `" .. Format(beli) .. "`\n> **Fragments:** `" .. Format(frag) .. "`",
                     ["inline"] = true
                 },
                 {
-                    ["name"] = "📦 KHO ĐỒ VẬT PHẨM",
+                    ["name"] = "📦 Inventory",
                     ["value"] = "━━━━━━━━━━━━━━━━━━━━━━━━\n" ..
-                                "<:Leviathan_Heart:1479139581440823327> **Tim Levi:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
-                                "<:Leviathan_Scale:1479139532522786988> **Vảy Levi:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
+                                "<:Leviathan_Heart:1479139581440823327> **Heart:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
+                                "<:Leviathan_Scale:1479139532522786988> **Scale:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
                                 "<:Mythical_Scroll:1442773244603007106> **Mythical:** `" .. GetItem("Mythical Scroll") .. "`\n" ..
                                 "<:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n" ..
                                 "━━━━━━━━━━━━━━━━━━━━━━━━",
@@ -89,7 +89,7 @@ local function Send()
                 }
             },
             ["footer"] = {
-                ["text"] = "Cập nhật lúc: " .. os.date("%H:%M:%S") .. " | Item Tracker",
+                ["text"] = "Last Update: " .. os.date("%H:%M:%S"),
                 ["icon_url"] = "https://cdn.jsdelivr.net/gh/TrongNguyenn1/Logo@main/H4XShop.png"
             }
         }}
