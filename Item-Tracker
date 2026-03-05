@@ -1,0 +1,114 @@
+local WebhookURL = getgenv().urlwhscrolls
+local UpdateInterval = getgenv().timechscrolls or 60
+
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Stats = game:GetService("Stats")
+
+local player = Players.LocalPlayer
+-- Tạo tên file riêng cho mỗi acc để không bị lộn (Ví dụ: LeviID_Gamer123.txt)
+local FileName = "LeviID_" .. player.Name .. ".txt"
+local MessageID = nil 
+
+-- Kiểm tra xem acc này đã từng gửi tin nhắn chưa
+if isfile and isfile(FileName) then
+    MessageID = readfile(FileName)
+end
+
+local startTime = os.time()
+local CommF = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_")
+
+local function Format(n)
+    return tostring(n):reverse():gsub("...","%0,",(#tostring(n)-1)/3):reverse()
+end
+
+local function GetItem(name)
+    local c = 0
+    pcall(function()
+        local inv = CommF:InvokeServer("getInventory")
+        for _, v in pairs(inv or {}) do 
+            if v.Name == name or v.Name == name:gsub("Mythic","Mythical"):gsub("Legend","Legendary") then 
+                c = v.Count break 
+            end 
+        end
+    end)
+    return c
+end
+
+local function Send()
+    local fps = math.floor(workspace:GetRealPhysicsFPS())
+    local ping = "0"
+    pcall(function()
+        ping = string.split(Stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), " ")[1]
+    end)
+    
+    local data = {
+        ["embeds"] = {{
+            ["title"] = "Blox Fruits Status",
+            ["description"] = "**Người chơi:** `" .. player.Name .. "`\n**ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━",
+            ["color"] = 0x2b2d31,
+            ["fields"] = {
+                {
+                    ["name"] = "🖥️ HỆ THỐNG",
+                    ["value"] = "> 🎮 **FPS:** `" .. fps .. "`\n> 📊 **Ping:** `" .. ping .. "ms`\n> ⏳ **Treo:** `" .. os.date("!%H:%M:%S", os.time() - startTime) .. "`",
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "👤 NHÂN VẬT",
+                    ["value"] = "> ⭐ **Level:** `" .. Format(player.Data.Level.Value) .. "`\n> 💵 **Beli:** `" .. Format(player.Data.Beli.Value) .. "`\n> 🟣 **Frag:** `" .. Format(player.Data.Fragments.Value) .. "`",
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "📦 KHO ĐỒ VẬT PHẨM",
+                    ["value"] = "━━━━━━━━━━━━━━━━━━━━━━━━\n" ..
+                                "<:Leviathan_Heart:1479139581440823327> **Tim Levi:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
+                                "<:Leviathan_Scale:1479139532522786988> **Vảy Levi:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
+                                "<:Mythical_Scroll:1442773244603007106> **Mythical:** `" .. GetItem("Mythical Scroll") .. "`\n" ..
+                                "<:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n" ..
+                                "━━━━━━━━━━━━━━━━━━━━━━━━",
+                    ["inline"] = false
+                }
+            },
+            ["footer"] = {
+                ["text"] = "Cập nhật lúc: " .. os.date("%H:%M:%S") .. " | Item Tracker",
+                ["icon_url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=420&height=420&format=png"
+            }
+        }}
+    }
+
+    local req = (syn and syn.request) or (http and http.request) or http_request or request
+    
+    -- Quyết định gửi mới hay sửa dựa trên việc có MessageID hay không
+    local url = (MessageID and MessageID ~= "") and (WebhookURL .. "/messages/" .. MessageID) or (WebhookURL .. "?wait=true")
+    local method = (MessageID and MessageID ~= "") and "PATCH" or "POST"
+
+    if req then
+        local res = req({
+            Url = url,
+            Method = method,
+            Headers = {["Content-Type"] = "application/json"},
+            Body = HttpService:JSONEncode(data)
+        })
+        
+        -- Nếu là lần đầu (POST), lấy ID trả về và lưu vào file
+        if (not MessageID or MessageID == "") and res.Success then
+            local responseData = HttpService:JSONDecode(res.Body)
+            MessageID = responseData.id
+            if writefile then
+                writefile(FileName, MessageID)
+            end
+        elseif not res.Success and MessageID then
+            -- Nếu Edit lỗi (có thể tin nhắn bị xóa), xóa ID cũ để lần sau tạo mới
+            MessageID = nil
+            if delfile then delfile(FileName) end
+        end
+    end
+end
+
+task.spawn(function()
+    while true do 
+        Send() 
+        task.wait(UpdateInterval) 
+    end
+end)
