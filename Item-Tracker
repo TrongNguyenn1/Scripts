@@ -1,13 +1,30 @@
+-- [QUAN TRỌNG CHO AUTOEXEC]: Chờ game load xong hoàn toàn
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+local Players = game:GetService("Players")
+
+-- Chờ LocalPlayer xuất hiện
+local player = Players.LocalPlayer
+while not player do
+    task.wait(0.5)
+    player = Players.LocalPlayer
+end
+
+-- Chờ thư mục Data của Blox Fruits load xong để không bị lỗi khi lấy Stats
+player:WaitForChild("Data", 9e9)
+player.Data:WaitForChild("Level", 9e9)
+
+-- Bắt đầu setup biến
 local WebhookURL = getgenv().urlwhscrolls
 local UpdateInterval = getgenv().timechscrolls or 60
 
-local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Stats = game:GetService("Stats")
 
-local player = Players.LocalPlayer
--- Tạo tên file riêng cho mỗi acc để không bị lộn (Ví dụ: LeviID_Gamer123.txt)
+-- Tạo tên file riêng cho mỗi acc để không bị lộn
 local FileName = "LeviID_" .. player.Name .. ".txt"
 local MessageID = nil 
 
@@ -43,6 +60,14 @@ local function Send()
         ping = string.split(Stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), " ")[1]
     end)
     
+    -- Dùng pcall để lấy data, phòng hờ lúc nhân vật chết hoặc chuyển server data bị gián đoạn
+    local level, beli, frag = 0, 0, 0
+    pcall(function()
+        level = player.Data.Level.Value
+        beli = player.Data.Beli.Value
+        frag = player.Data.Fragments.Value
+    end)
+    
     local data = {
         ["embeds"] = {{
             ["title"] = "Blox Fruits Status",
@@ -56,7 +81,7 @@ local function Send()
                 },
                 {
                     ["name"] = "👤 NHÂN VẬT",
-                    ["value"] = "> ⭐ **Level:** `" .. Format(player.Data.Level.Value) .. "`\n> 💵 **Beli:** `" .. Format(player.Data.Beli.Value) .. "`\n> 🟣 **Frag:** `" .. Format(player.Data.Fragments.Value) .. "`",
+                    ["value"] = "> ⭐ **Level:** `" .. Format(level) .. "`\n> 💵 **Beli:** `" .. Format(beli) .. "`\n> 🟣 **Frag:** `" .. Format(frag) .. "`",
                     ["inline"] = true
                 },
                 {
@@ -79,29 +104,30 @@ local function Send()
 
     local req = (syn and syn.request) or (http and http.request) or http_request or request
     
-    -- Quyết định gửi mới hay sửa dựa trên việc có MessageID hay không
     local url = (MessageID and MessageID ~= "") and (WebhookURL .. "/messages/" .. MessageID) or (WebhookURL .. "?wait=true")
     local method = (MessageID and MessageID ~= "") and "PATCH" or "POST"
 
     if req then
-        local res = req({
-            Url = url,
-            Method = method,
-            Headers = {["Content-Type"] = "application/json"},
-            Body = HttpService:JSONEncode(data)
-        })
+        local success, res = pcall(function()
+            return req({
+                Url = url,
+                Method = method,
+                Headers = {["Content-Type"] = "application/json"},
+                Body = HttpService:JSONEncode(data)
+            })
+        end)
         
-        -- Nếu là lần đầu (POST), lấy ID trả về và lưu vào file
-        if (not MessageID or MessageID == "") and res.Success then
-            local responseData = HttpService:JSONDecode(res.Body)
-            MessageID = responseData.id
-            if writefile then
-                writefile(FileName, MessageID)
+        if success and res and res.Success then
+            if not MessageID or MessageID == "" then
+                local responseData = HttpService:JSONDecode(res.Body)
+                MessageID = responseData.id
+                if writefile then
+                    writefile(FileName, MessageID)
+                end
             end
-        elseif not res.Success and MessageID then
-            -- Nếu Edit lỗi (có thể tin nhắn bị xóa), xóa ID cũ để lần sau tạo mới
+        elseif success and res and not res.Success and MessageID then
             MessageID = nil
-            if delfile then delfile(FileName) end
+            if delfile and isfile(FileName) then delfile(FileName) end
         end
     end
 end
