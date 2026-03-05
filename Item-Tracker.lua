@@ -143,8 +143,8 @@ local function Send()
 
     local data = {
         ["embeds"] = {{
-            ["title"] = "Blox Fruits Player Overview",
-            ["description"] = "**Player:** `" .. player.Name .. "`\n**User ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━",
+            ["title"] = "**Blox Fruits Player Overview**",
+            ["description"] = "**Player:** `" .. player.Name .. "`\n**User ID:** `" .. player.UserId .. "`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
             ["color"] = 0x2b2d31,
             ["fields"] = {
                 {
@@ -159,12 +159,12 @@ local function Send()
                 },
                 {
                     ["name"] = "📦 Inventory",
-                    ["value"] = "━━━━━━━━━━━━━━━━━━━━━━━━\n" ..
-                                "<:Leviathan_Heart:1479139581440823327> **Heart:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
-                                "<:Leviathan_Scale:1479139532522786988> **Scale:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
-                                "<:Mythical_Scroll:1442773244603007106> **Mythical:** `" .. GetItem("Mythical Scroll") .. "`\n" ..
-                                "<:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n" ..
-                                "━━━━━━━━━━━━━━━━━━━━━━━━",
+                    ["value"] =
+                        "> <:Leviathan_Heart:1479139581440823327> **Heart:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
+                        "> <:Leviathan_Scale:1479139532522786988> **Scale:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
+                        "> <:Mythical_Scroll:1442773244603007106> **Mythical:** `" .. GetItem("Mythical Scroll") .. "`\n" ..
+                        "> <:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n\n" ..
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                     ["inline"] = false
                 }
             },
