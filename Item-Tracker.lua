@@ -163,7 +163,7 @@ local function Send()
                         "> <:Leviathan_Heart:1479139581440823327> **Heart:** `" .. GetItem("Leviathan Heart") .. "`\n" ..
                         "> <:Leviathan_Scale:1479139532522786988> **Scale:** `" .. GetItem("Leviathan Scale") .. "`\n" ..
                         "> <:Mythical_Scroll:1442773244603007106> **Mythical:** `" .. GetItem("Mythical Scroll") .. "`\n" ..
-                        "> <:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n\n" ..
+                        "> <:Legendary_Scroll:1442773297623334982> **Legendary:** `" .. GetItem("Legendary Scroll") .. "`\n" ..
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                     ["inline"] = false
                 }
