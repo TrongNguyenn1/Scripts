@@ -90,7 +90,7 @@ local function Send()
             },
             ["footer"] = {
                 ["text"] = "Cập nhật lúc: " .. os.date("%H:%M:%S") .. " | Item Tracker",
-                ["icon_url"] = "https://raw.githubusercontent.com/TrongNguyenn1/Logo/main/H4XShop.png" .. player.UserId .. "&width=420&height=420&format=png"
+                ["icon_url"] = "https://raw.githubusercontent.com/TrongNguyenn1/Logo/main/H4XShop.png"
             }
         }}
     }
