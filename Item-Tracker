@@ -1,22 +1,18 @@
--- [QUAN TRỌNG CHO AUTOEXEC]: Chờ game load xong hoàn toàn
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
 local Players = game:GetService("Players")
 
--- Chờ LocalPlayer xuất hiện
 local player = Players.LocalPlayer
 while not player do
     task.wait(0.5)
     player = Players.LocalPlayer
 end
 
--- Chờ thư mục Data của Blox Fruits load xong để không bị lỗi khi lấy Stats
 player:WaitForChild("Data", 9e9)
 player.Data:WaitForChild("Level", 9e9)
 
--- Bắt đầu setup biến
 local WebhookURL = getgenv().urlwhscrolls
 local UpdateInterval = getgenv().timechscrolls or 60
 
@@ -24,11 +20,9 @@ local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Stats = game:GetService("Stats")
 
--- Tạo tên file riêng cho mỗi acc để không bị lộn
 local FileName = "LeviID_" .. player.Name .. ".txt"
 local MessageID = nil 
 
--- Kiểm tra xem acc này đã từng gửi tin nhắn chưa
 if isfile and isfile(FileName) then
     MessageID = readfile(FileName)
 end
@@ -60,7 +54,6 @@ local function Send()
         ping = string.split(Stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), " ")[1]
     end)
     
-    -- Dùng pcall để lấy data, phòng hờ lúc nhân vật chết hoặc chuyển server data bị gián đoạn
     local level, beli, frag = 0, 0, 0
     pcall(function()
         level = player.Data.Level.Value
